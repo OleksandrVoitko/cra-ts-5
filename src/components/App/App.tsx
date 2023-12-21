@@ -1,7 +1,5 @@
-import { lazy, Suspense } from "react";
+import { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
-
-import Loader from "../Loader/Loader";
 
 import Navigation from "../Navigation/Navigation";
 
@@ -13,19 +11,16 @@ const Reviews = lazy(() => import("../Reviews"));
 
 function App() {
   return (
-    <div>
-      <Navigation />
-      <Suspense fallback={<Loader />}>
-        <Routes>
-          <Route index element={<PageHome />} />
-          <Route path="/movies" element={<PageSearchMovies />} />
-          <Route path="/movies/:movieId" element={<PageMovieDetails />}>
-            <Route path="cast" element={<Cast />} />
-            <Route path="reviews" element={<Reviews />} />
-          </Route>
-        </Routes>
-      </Suspense>
-    </div>
+    <Routes>
+      <Route path="/" element={<Navigation />}>
+        <Route index element={<PageHome />} />
+        <Route path="/movies" element={<PageSearchMovies />} />
+        <Route path="/movies/:movieId" element={<PageMovieDetails />}>
+          <Route path="cast" element={<Cast />} />
+          <Route path="reviews" element={<Reviews />} />
+        </Route>
+      </Route>
+    </Routes>
   );
 }
 
